@@ -1,44 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Updated professional hero images
   const heroBackgroundImages = [
-    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1542831371-29b0f74f9491?q=80&w=2070&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1498050108023-c5249f4cd085?q=80&w=2070&auto=format&fit=crop',
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80",
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
   ];
 
-  const profilePicture = '/src/assets/EZEKIEL WEKESA.jpeg';
+  const profilePicture = "/src/assets/EZEKIEL WEKESA.jpeg";
 
   const projectsData = [
     {
       id: 1,
-      title: 'E-commerce Platform',
-      description: 'Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment processing, and admin dashboard.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      github: 'https://github.com/ewwabwoba/ecommerce-platform',
-      live: '#'
+      title: "E-commerce Platform",
+      description:
+        "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment processing, and admin dashboard.",
+      image:
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      github: "https://github.com/zablonzekky/Ecommerce-website",
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.',
-      image: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2940&auto=format&fit=crop',
-      technologies: ['Vue.js', 'Firebase', 'Tailwind'],
-      github: 'https://github.com/ewwabwoba/task-manager',
-      live: '#'
+      title: "Task Management App",
+      description:
+        "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      image:
+        "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+      technologies: ["Vue.js", "Firebase", "Tailwind", "WebSockets"],
+      github: "https://github.com/zablonzekky/task-management-app",
     },
     {
       id: 3,
-      title: 'Weather Analytics',
-      description: 'Real-time weather analytics dashboard with interactive charts, location-based forecasts, and historical data visualization.',
-      image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg',
-      technologies: ['Angular', 'D3.js', 'API'],
-      github: 'https://github.com/ewwabwoba/weather-analytics',
-      live: '#'
-    }
+      title: "Weather Analytics Dashboard",
+      description:
+        "Real-time weather analytics dashboard with interactive charts, location-based forecasts, and historical data visualization.",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      technologies: ["Angular", "D3.js", "API Integration", "TypeScript"],
+      github: "https://github.com/zablonzekky/Weather-app",
+    },
   ];
 
   useEffect(() => {
@@ -48,132 +53,165 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroBackgroundImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide(
+      (prev) =>
+        (prev - 1 + heroBackgroundImages.length) % heroBackgroundImages.length
+    );
+  };
+
   return (
-    <div className="w-100 bg-light" style={{ overflowX: 'hidden' }}>
-      {/* Hero Section */}
-      <section className="position-relative overflow-hidden w-100" style={{ 
-        background: 'linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%)',
-        minHeight: '650px'
-      }}>
+    <div className="w-100 bg-white" style={{ overflowX: "hidden" }}>
+      {/* Enhanced Hero Section */}
+      <section
+        className="position-relative overflow-hidden w-100"
+        style={{
+          background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {/* Background Carousel */}
         <div className="position-absolute top-0 start-0 w-100 h-100">
           {heroBackgroundImages.map((image, index) => (
+            // <div
+            //   className="position-absolute top-0 start-0 w-100 h-100"
+            //   style={{
+            //     backgroundImage: `url(${heroBackgroundImages[currentSlide]})`,
+            //     backgroundSize: "cover",
+            //     backgroundPosition: "center",
+            //     filter: "brightness(0.3)",
+            //     transition: "background-image 0.8s ease-in-out",
+            //   }}
+            // />
+
             <div
               key={index}
               className="position-absolute top-0 start-0 w-100 h-100"
               style={{
                 backgroundImage: `url(${image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                opacity: currentSlide === index ? 0.15 : 0,
-                transition: 'opacity 1s ease-in-out'
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                opacity: currentSlide === index ? 0.2 : 0,
+                transition: "opacity 1.2s ease-in-out",
+                filter: "brightness(0.3)",
               }}
             />
           ))}
         </div>
 
-        <div className="container-fluid position-relative py-5 px-3 px-md-4 px-lg-5" style={{ zIndex: 1 }}>
+        {/* Carousel Controls */}
+        <button
+          className="btn btn-link position-absolute start-0 top-50 translate-middle-y text-white opacity-75 hover-opacity-100"
+          style={{ zIndex: 2, left: "20px" }}
+          onClick={prevSlide}
+        >
+          <i className="fas fa-chevron-left fa-2x"></i>
+        </button>
+        <button
+          className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-white opacity-75 hover-opacity-100"
+          style={{ zIndex: 2, right: "20px" }}
+          onClick={nextSlide}
+        >
+          <i className="fas fa-chevron-right fa-2x"></i>
+        </button>
+
+        {/* Carousel Indicators */}
+        <div
+          className="position-absolute bottom-4 start-50 translate-middle-x d-flex gap-2"
+          style={{ zIndex: 2 }}
+        >
+          {heroBackgroundImages.map((_, index) => (
+            <button
+              key={index}
+              className={`btn btn-sm p-0 rounded-circle ${
+                currentSlide === index ? "bg-white" : "bg-white bg-opacity-50"
+              }`}
+              style={{ width: "12px", height: "12px" }}
+              onClick={() => setCurrentSlide(index)}
+            />
+          ))}
+        </div>
+        <div
+          className="container-fluid position-relative py-5 px-3 px-md-4 px-lg-5"
+          style={{ zIndex: 1 }}
+        >
           <div className="row align-items-center justify-content-center py-5 g-4">
             <div className="col-12">
-              <div className="row align-items-center g-4">
+              <div className="row align-items-center g-5">
                 <div className="col-lg-7 text-white mb-4 mb-lg-0">
-                  <h1 className="display-2 fw-bold mb-3">Ezekiel Wabwoba</h1>
-                  <h2 className="h2 mb-4">Software Engineer</h2>
-                  <p className="h4 mb-4 opacity-75 fw-normal">Innovator & Problem Solver</p>
-                  <p className="fs-5 mb-4 opacity-90" style={{ maxWidth: '650px' }}>
-                    Dynamic and passionate Software Engineer with a strong passion for innovation and
-                    transformative technology. Proficient in multiple programming languages with proven
-                    ability to build products from concept to deployment.
+                  <div className="mb-4">
+                    <span className="badge bg-primary bg-opacity-20 text-white border border-primary border-opacity-25 px-3 py-2 rounded-pill fs-6 fw-normal">
+                      Software Engineer
+                    </span>
+                  </div>
+                  <h1
+                    className="display-3 fw-bold mb-3"
+                    style={{ lineHeight: "1.2" }}
+                  >
+                    Ezekiel <span className="text-primary">Wabwoba</span>
+                  </h1>
+                  <h2 className="h3 mb-4 text-light opacity-90 fw-light">
+                    Building Digital Solutions That Make a Difference
+                  </h2>
+                  <p
+                    className="fs-5 mb-4 opacity-80 fw-light"
+                    style={{ maxWidth: "600px", lineHeight: "1.7" }}
+                  >
+                    Full-stack developer specializing in creating scalable web
+                    applications, AI-powered solutions, and enterprise software.
+                    Transforming complex problems into elegant, user-friendly
+                    solutions.
                   </p>
                   <div className="d-flex gap-3 flex-wrap">
-                    <a href="#projects" className="btn btn-primary btn-lg px-5 py-3 rounded-pill">
+                    <a
+                      href="#projects"
+                      className="btn btn-primary btn-lg px-4 py-3 rounded-1 fw-semibold d-flex align-items-center gap-2"
+                    >
+                      <i className="fas fa-eye"></i>
                       View My Work
                     </a>
-                    <a href="/contact" className="btn btn-light btn-lg px-5 py-3 rounded-pill">
-                      Hire Me
+                    <a
+                      href="/contact"
+                      className="btn btn-outline-light btn-lg px-4 py-3 rounded-1 fw-semibold d-flex align-items-center gap-2"
+                    >
+                      <i className="fas fa-paper-plane"></i>
+                      Get In Touch
                     </a>
                   </div>
                 </div>
-                {/* <div className="col-lg-5 text-center">
-                  <div 
-                    className="rounded-circle mx-auto overflow-hidden bg-white p-2 shadow-lg"
-                    style={{ 
-                      width: 'min(400px, 85vw)', 
-                      height: 'min(400px, 85vw)',
-                      border: '6px solid rgba(255, 255, 255, 0.2)'
-                    }}
-                  >
-                    <img 
-                      src={profilePicture} 
-                      alt="Ezekiel Wabwoba" 
-                      className="w-100 h-100 rounded-circle"
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                </div> */
                 <div className="col-lg-5 text-center">
-  <div
-    className="rounded-circle mx-auto overflow-hidden shadow-lg"
-    style={{
-      width: 'min(400px, 85vw)',
-      height: 'min(400px, 85vw)',
-      border: '6px solid #33b5e6', // Blue border only
-    }}
-  >
-    <img
-      src={profilePicture}
-      alt="Ezekiel Wabwoba"
-      className="w-100 h-100 rounded-circle"
-      style={{ objectFit: 'cover' }}
-    />
-  </div>
-</div>
-
-                }
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Stats Section */}
-      <section className="py-5 bg-white w-100">
-        <div className="container-fluid px-3 px-md-4 px-lg-5 py-4">
-          <h2 className="text-center mb-5 fw-bold display-6">Quick Stats</h2>
-          <div className="row g-4">
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="text-center p-4 rounded-3 h-100 shadow-sm" style={{ 
-                border: '2px solid #e3f2fd',
-                background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)'
-              }}>
-                <h3 className="display-3 fw-bold mb-2" style={{ color: '#2196F3' }}>3+</h3>
-                <p className="mb-0 text-secondary fw-medium fs-5">Years Experience</p>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="text-center p-4 rounded-3 h-100 shadow-sm" style={{ 
-                border: '2px solid #e3f2fd',
-                background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)'
-              }}>
-                <h3 className="display-3 fw-bold mb-2" style={{ color: '#2196F3' }}>50+</h3>
-                <p className="mb-0 text-secondary fw-medium fs-5">Projects Completed</p>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="text-center p-4 rounded-3 h-100 shadow-sm" style={{ 
-                border: '2px solid #e3f2fd',
-                background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)'
-              }}>
-                <h3 className="display-3 fw-bold mb-2" style={{ color: '#2196F3' }}>50+</h3>
-                <p className="mb-0 text-secondary fw-medium fs-5">Happy Clients</p>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div className="text-center p-4 rounded-3 h-100 shadow-sm" style={{ 
-                border: '2px solid #e3f2fd',
-                background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)'
-              }}>
-                <h3 className="display-3 fw-bold mb-2" style={{ color: '#2196F3' }}>IT</h3>
-                <p className="mb-0 text-secondary fw-medium fs-5">Professional</p>
+                  <div className="position-relative">
+                    <div
+                      className="rounded-3 mx-auto overflow-hidden shadow-lg"
+                      style={{
+                        width: "min(380px, 80vw)",
+                        height: "min(380px, 80vw)",
+                        border: "none",
+                        position: "relative",
+                      }}
+                    >
+                      <img
+                        src={profilePicture}
+                        alt="Ezekiel Wabwoba"
+                        className="w-100 h-100"
+                        style={{
+                          width: "350px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                          height: "350px",
+                          border: "5px solid white",
+                          // border: "10px solid rgba(255, 251, 251, 0.1)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -181,42 +219,102 @@ const Home = () => {
       </section>
 
       {/* Enhanced Intro Section */}
-      <section className="py-5 w-100" style={{ background: 'linear-gradient(to bottom, #e3f2fd, #f5f5f5)' }}>
-        <div className="container-fluid px-3 px-md-4 px-lg-5 py-4">
+      <section className="py-5 w-100 bg-light">
+        <div className="container-fluid px-3 px-md-4 px-lg-5 py-5">
           <div className="row align-items-center g-5">
-            <div className="col-lg-3 col-md-4 text-center mb-4 mb-lg-0">
-              <div 
-                className="rounded-circle mx-auto overflow-hidden bg-white shadow"
-                style={{ width: '220px', height: '220px' }}
-              >
-                <img 
-                  src={profilePicture} 
-                  alt="Ezekiel Wabwoba" 
-                  className="w-100 h-100"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-            </div>
-            <div className="col-lg-9 col-md-8">
-              <div className="ps-lg-4">
-                <p className="text-primary fw-semibold mb-2 fs-5">Hello, I'm</p>
-                <h2 className="display-4 fw-bold mb-4">Ezekiel Wabwoba</h2>
-                <p className="text-secondary mb-4 fs-5" style={{ lineHeight: '1.8' }}>
-                  Passionate software engineer specializing in building innovative solutions
-                  using modern technologies. Currently pursuing Bachelor's Degree in Computer Science
-                  at Southeastern Kenya University with experience in full-stack development,
-                  AI systems, and enterprise-level solutions.
+            <div className="col-lg-8">
+              <div className="pe-lg-4">
+                <h2 className="display-5 fw-bold mb-4">
+                  Crafting Digital Excellence
+                </h2>
+                <div className="row g-4 mb-4">
+                  <div className="col-sm-6">
+                    <div className="d-flex align-items-center gap-3">
+                      <div className="bg-primary bg-opacity-10 rounded-2 p-3">
+                        <i className="fas fa-laptop-code text-primary fs-4"></i>
+                      </div>
+                      <div>
+                        <h6 className="fw-bold mb-1">Full-Stack Development</h6>
+                        <small className="text-muted">
+                          React, Node.js, Python
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-sm-6">
+                    <div className="d-flex align-items-center gap-3">
+                      <div className="bg-success bg-opacity-10 rounded-2 p-3">
+                        <i className="fas fa-robot text-success fs-4"></i>
+                      </div>
+                      <div>
+                        <h6 className="fw-bold mb-1">AI & ML Solutions</h6>
+                        <small className="text-muted">
+                          92% Accuracy Models
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p
+                  className="text-secondary fs-5 mb-4"
+                  style={{ lineHeight: "1.8" }}
+                >
+                  With a strong foundation in computer science and hands-on
+                  experience in modern technologies, I specialize in building
+                  robust applications that solve real-world problems. Currently
+                  advancing my expertise while pursuing a Bachelor's Degree in
+                  Computer Science.
                 </p>
                 <div className="d-flex gap-3 flex-wrap">
-                  <a href="https://github.com/zablonzekky" className="btn btn-primary btn-lg px-5 rounded-pill" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://github.com/zablonzekky"
+                    className="btn btn-dark btn-lg px-4 rounded-1 d-flex align-items-center gap-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-github"></i>
                     GitHub
                   </a>
-                  <a href="https://linkedin.com/in/ezekiel-wabwoba" className="btn btn-outline-primary btn-lg px-5 rounded-pill" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://www.linkedin.com/in/ezekiel-wekesa-162578241/?lipi=urn%3Ali%3Apage%3Ad_flagship3_notifications%3BxFWtgE3rSr%2B5r8wv0zRwXw%3D%3D"
+                    className="btn btn-primary btn-lg px-4 rounded-1 d-flex align-items-center gap-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-linkedin"></i>
                     LinkedIn
                   </a>
-                  <a href="/contact" className="btn btn-success btn-lg px-5 rounded-pill">
-                    Get In Touch
+                  <a
+                    href="/contact"
+                    className="btn btn-outline-dark btn-lg px-4 rounded-1 d-flex align-items-center gap-2"
+                  >
+                    <i className="fas fa-envelope"></i>
+                    Contact Me
                   </a>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4">
+              <div className="bg-white rounded-3 p-4 shadow-sm border">
+                <h5 className="fw-bold mb-3">Core Technologies</h5>
+                <div className="row g-3">
+                  {[
+                    "React",
+                    "Node.js",
+                    "Python",
+                    "MongoDB",
+                    "Angular",
+                    "Django",
+                  ].map((tech, index) => (
+                    <div key={index} className="col-6">
+                      <div className="d-flex align-items-center gap-2 p-2 rounded-2 hover-bg-light">
+                        <div className="bg-primary bg-opacity-10 rounded-1 p-2">
+                          <i className="fas fa-check text-primary fs-6"></i>
+                        </div>
+                        <span className="fw-medium">{tech}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -224,181 +322,223 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Projects Section */}
+      {/* Enhanced Featured Projects Section */}
       <section className="py-5 bg-white w-100" id="projects">
-        <div className="container-fluid px-3 px-md-4 px-lg-5 py-4">
+        <div className="container-fluid px-3 px-md-4 px-lg-5 py-5">
           <div className="text-center mb-5">
             <h2 className="display-5 fw-bold mb-3">Featured Projects</h2>
-            <p className="text-secondary fs-5 mx-auto" style={{ maxWidth: '700px' }}>
-              Explore some of my recent work showcasing modern web development practices and innovative solutions.
+            <p
+              className="text-secondary fs-5 mx-auto"
+              style={{ maxWidth: "700px" }}
+            >
+              A showcase of my recent work demonstrating modern development
+              practices, clean architecture, and user-centered design
+              principles.
             </p>
           </div>
-          
+
           <div className="row g-4 mb-5">
             {projectsData.map((project) => (
               <div key={project.id} className="col-lg-4 col-md-6">
-                <div className="card h-100 border-0 shadow-sm overflow-hidden" style={{ transition: 'transform 0.3s' }} 
-                     onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-8px)'}
-                     onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                  <div className="overflow-hidden" style={{ height: '220px' }}>
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-100 h-100" 
-                      style={{ 
-                        objectFit: 'cover',
-                        transition: 'transform 0.3s'
+                <div
+                  className="card h-100 border-0 shadow-sm overflow-hidden position-relative"
+                  style={{
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    borderRadius: "12px",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-8px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 12px 40px rgba(0,0,0,0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 20px rgba(0,0,0,0.08)";
+                  }}
+                >
+                  <div
+                    className="position-relative overflow-hidden"
+                    style={{ height: "240px" }}
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-100 h-100"
+                      style={{
+                        objectFit: "cover",
+                        transition: "transform 0.3s ease",
                       }}
-                      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-                      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.transform = "scale(1.05)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.transform = "scale(1)")
+                      }
                     />
+                    <div className="position-absolute top-0 end-0 m-3">
+                      <span className="badge bg-dark bg-opacity-75 px-3 py-2 rounded-1">
+                        {project.technologies[0]}
+                      </span>
+                    </div>
                   </div>
                   <div className="card-body p-4">
-                    <h5 className="card-title fw-bold mb-3 fs-4">{project.title}</h5>
-                    <p className="card-text text-secondary mb-4">{project.description}</p>
+                    <h5 className="card-title fw-bold mb-3 fs-5">
+                      {project.title}
+                    </h5>
+                    <p
+                      className="card-text text-secondary mb-4"
+                      style={{ lineHeight: "1.6" }}
+                    >
+                      {project.description}
+                    </p>
                     <div className="d-flex flex-wrap gap-2 mb-4">
                       {project.technologies.map((tech, index) => (
-                        <span key={index} className="badge rounded-pill px-3 py-2" style={{ 
-                          background: 'linear-gradient(135deg, #2196F3, #1976D2)',
-                          fontSize: '0.85rem'
-                        }}>
+                        <span
+                          key={index}
+                          className="badge rounded-1 px-3 py-2 bg-light text-dark border"
+                          style={{
+                            fontSize: "0.8rem",
+                          }}
+                        >
                           {tech}
                         </span>
                       ))}
                     </div>
                     <div className="d-flex gap-2">
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
+                      <a
+                        href={project.github}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-outline-primary flex-fill rounded-pill"
+                        className="btn btn-outline-dark flex-fill rounded-1 d-flex align-items-center justify-content-center gap-2"
                       >
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="me-1">
-                          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                        </svg>
-                        GitHub
+                        <i className="fab fa-github"></i>
+                        <i className="fas fa-external-link-alt"></i>
+                        Live Demo
                       </a>
-                      {/* <a 
-                        href={project.live} 
-                        className="btn btn-primary flex-fill rounded-pill"
-                      >
-                        View Live
-                      </a> */}
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          
+
           <div className="text-center">
-            <a href="/projects" className="btn btn-primary btn-lg px-5 py-3 rounded-pill">
+            <a
+              href="/projects"
+              className="btn btn-outline-primary btn-lg px-5 py-3 rounded-1 fw-semibold d-inline-flex align-items-center gap-2"
+            >
+              <i className="fas fa-folder-open"></i>
               View All Projects
             </a>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-5 w-100" style={{ background: 'linear-gradient(to bottom, #f5f5f5, #e3f2fd)' }}>
-        <div className="container-fluid px-3 px-md-4 px-lg-5 py-4">
-          <h2 className="text-center mb-5 fw-bold display-6">What I Do</h2>
+      {/* Enhanced Services Section */}
+      <section
+        className="py-5 w-100"
+        style={{
+          background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
+          borderTop: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        <div className="container-fluid px-3 px-md-4 px-lg-5 py-5">
+          <h2 className=" text-white text-center mb-5 fw-bold display-5">
+            Expertise & Services
+          </h2>
           <div className="row g-4">
             <div className="col-lg-4 col-md-6">
-              <div className="text-center p-5 h-100 rounded-3 bg-white shadow-sm">
-                <div 
-                  className="rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center"
-                  style={{ 
-                    width: '100px', 
-                    height: '100px',
-                    background: 'linear-gradient(135deg, #2196F3, #1976D2)'
+              <div className="text-center p-5 h-100 rounded-3 bg-dark bg-opacity-50 border border-light border-opacity-10 hover-lift">
+                <div
+                  className="rounded-3 mx-auto mb-4 d-flex align-items-center justify-content-center"
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    background: "linear-gradient(135deg, #3b82f6, #1d4ed8)",
                   }}
                 >
-                  <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                    <rect x="2" y="3" width="20" height="14" rx="2"/>
-                    <line x1="8" y1="21" x2="16" y2="21"/>
-                    <line x1="12" y1="17" x2="12" y2="21"/>
-                  </svg>
+                  <i className="fas fa-code text-white fs-3"></i>
                 </div>
-                <h5 className="fw-bold mb-3 fs-4">Full-Stack Development</h5>
-                <p className="text-secondary fs-6 mb-0">
-                  Building responsive web applications using modern technologies like React,
-                  Django, Python, JavaScript, and various databases. Experience in creating
-                  scalable solutions from concept to deployment.
+                <h5 className="text-white fw-bold mb-3">
+                  Full-Stack Development
+                </h5>
+                <p
+                  className="text-light opacity-80 mb-0"
+                  style={{ lineHeight: "1.7" }}
+                >
+                  End-to-end web application development using modern frameworks
+                  and architectures. Specialized in React, Vue, Node.js, and
+                  cloud deployment.
                 </p>
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
-              <div className="text-center p-5 h-100 rounded-3 bg-white shadow-sm">
-                <div 
-                  className="rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center"
-                  style={{ 
-                    width: '100px', 
-                    height: '100px',
-                    background: 'linear-gradient(135deg, #2196F3, #1976D2)'
+              <div className="text-center p-5 h-100 rounded-3 bg-dark bg-opacity-50 border border-light border-opacity-10 hover-lift">
+                <div
+                  className="rounded-3 mx-auto mb-4 d-flex align-items-center justify-content-center"
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    background: "linear-gradient(135deg, #10b981, #047857)",
                   }}
                 >
-                  <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m0-6l4.2-4.2"/>
-                  </svg>
+                  <i className="fas fa-robot text-white fs-3"></i>
                 </div>
-                <h5 className="fw-bold mb-3 fs-4">AI & Machine Learning</h5>
-                <p className="text-secondary fs-6 mb-0">
-                  Developing intelligent systems and sentiment analysis tools with
-                  high accuracy rates. Built a sentiment analysis system achieving 92% accuracy
-                  for data-driven decision making.
+                <h5 className=" text-white fw-bold mb-3">
+                  AI & Machine Learning
+                </h5>
+                <p
+                  className="text-light opacity-80 mb-0"
+                  style={{ lineHeight: "1.7" }}
+                >
+                  Building intelligent systems with 92% accuracy in sentiment
+                  analysis. Experience in NLP, predictive modeling, and
+                  data-driven solutions.
                 </p>
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
-              <div className="text-center p-5 h-100 rounded-3 bg-white shadow-sm">
-                <div 
-                  className="rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center"
-                  style={{ 
-                    width: '100px', 
-                    height: '100px',
-                    background: 'linear-gradient(135deg, #2196F3, #1976D2)'
+              <div className="text-center p-5 h-100 rounded-3 bg-dark bg-opacity-50 border border-light border-opacity-10 hover-lift">
+                <div
+                  className="rounded-3 mx-auto mb-4 d-flex align-items-center justify-content-center"
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    background: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
                   }}
                 >
-                  <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
+                  <i className="fas fa-server text-white fs-3"></i>
                 </div>
-                <h5 className="fw-bold mb-3 fs-4">IT Solutions</h5>
-                <p className="text-secondary fs-6 mb-0">
-                  Providing comprehensive IT support, network configuration, and
-                  system maintenance services. Experience in enterprise-level systems
-                  management and technical support.
+                <h5 className="text-white fw-bold mb-3">Cloud & DevOps</h5>
+                <p
+                  className="text-light opacity-80 mb-0"
+                  style={{ lineHeight: "1.7" }}
+                >
+                  Scalable cloud infrastructure, CI/CD pipelines, and
+                  containerized deployments. Ensuring high availability and
+                  performance optimization.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-5 w-100" style={{ 
-        background: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)'
-      }}>
-        <div className="container-fluid px-3 px-md-4 px-lg-5 py-5">
-          <div className="text-center text-white">
-            <h2 className="display-4 fw-bold mb-4">Let's Work Together</h2>
-            <p className="lead mb-5 opacity-90 mx-auto" style={{ maxWidth: '700px' }}>
-              Ready to bring your ideas to life? I'm available for freelance projects,
-              full-time opportunities, and collaborative ventures. Let's create something amazing together!
-            </p>
-            <div className="d-flex gap-3 justify-content-center flex-wrap">
-              <a href="/contact" className="btn btn-light btn-lg px-5 py-3 rounded-pill fw-semibold">
-                Contact Me
-              </a>
-              <a href="/projects" className="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-semibold">
-                View Projects
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <style jsx>{`
+        .hover-lift {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .hover-bg-light:hover {
+          background-color: rgba(0, 0, 0, 0.02);
+        }
+        .hover-opacity-100:hover {
+          opacity: 1 !important;
+        }
+      `}</style>
     </div>
   );
 };

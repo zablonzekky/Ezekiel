@@ -3,9 +3,10 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer 
-      className="bg-dark text-white py-4 mt-auto w-100"
+      className="text-white py-4 mt-auto w-100"
       style={{
         position: 'relative',
+        backgroundColor: '#0b5aa7',
         left: 0,
         right: 0,
         width: '100%',
